@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Character Counter — Clase 14</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #F1F2F2;
+      color: #20203A;
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+    .app {
+      background: #fff;
+      width: 100%;
+      max-width: 480px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(43, 41, 109, 0.12);
+      padding: 26px;
+    }
+    h1 { color: #2B296D; font-size: 22px; margin: 0 0 4px; }
+    .sub { color: #6E6E80; font-size: 13px; margin: 0 0 20px; }
+    #texto {
+      width: 100%;
+      min-height: 120px;
+      padding: 12px;
+      border: 1.5px solid #CFD0DA;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      resize: vertical;
+    }
+    #texto:focus { outline: none; border-color: #0E6689; }
+    #texto.excedido { border-color: #C0392B; color: #C0392B; }
+
+    .resultados {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .stat {
+      flex: 1;
+      background: #F7F7FA;
+      border: 1px solid #E7E7EE;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .stat strong { display: block; font-size: 20px; color: #2B296D; }
+    .stat.excedido strong { color: #C0392B; }
+    .stat span { font-size: 12px; color: #6E6E80; }
+
+    #limpiar {
+      margin-top: 16px;
+      width: 100%;
+      background: #0E6689;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 11px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    #limpiar:hover { background: #0b4f68; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>Character Counter</h1>
+    <p class="sub">TP Clase 14 · Proyecto integrador</p>
+
+    <textarea id="texto" placeholder="Escribí acá tu texto..."></textarea>
+
+    <div class="resultados">
+      <div class="stat" id="statCaracteres">
+        <strong id="caracteres">0</strong>
+        <span>Caracteres</span>
+      </div>
+      <div class="stat">
+        <strong id="palabras">0</strong>
+        <span>Palabras</span>
+      </div>
+      <div class="stat">
+        <strong id="sinEspacios">0</strong>
+        <span>Sin espacios</span>
+      </div>
+      <div class="stat" id="statRestan">
+        <strong id="restan">280</strong>
+        <span>Restan</span>
+      </div>
+    </div>
+
+    <button id="limpiar">Limpiar</button>
+  </div>
+
+  <script>
+    const LIMITE = 280;
+
+    let texto        = document.querySelector("#texto");
+    let caracteres    = document.querySelector("#caracteres");
+    let palabras      = document.querySelector("#palabras");
+    let sinEspacios   = document.querySelector("#sinEspacios");
+    let restan        = document.querySelector("#restan");
+    let statCaracteres = document.querySelector("#statCaracteres");
+    let statRestan     = document.querySelector("#statRestan");
+    let botonLimpiar   = document.querySelector("#limpiar");
+
+    function contarPalabras(valor) {
+      let limpio = valor.trim();
+      return limpio === "" ? 0 : limpio.split(/\s+/).length;
+    }
+
+    function actualizarContadores() {
+      let valor = texto.value;
+      let largo = valor.length;
+      let restantes = LIMITE - largo;
+      let pasado = largo > LIMITE;
+
+      caracteres.textContent = largo;
+      palabras.textContent = contarPalabras(valor);
+      sinEspacios.textContent = valor.replaceAll(" ", "").length;
+      restan.textContent = restantes;
+
+      texto.classList.toggle("excedido", pasado);
+      statCaracteres.classList.toggle("excedido", pasado);
+      statRestan.classList.toggle("excedido", pasado);
+    }
+
+    texto.addEventListener("input", actualizarContadores);
+
+    botonLimpiar.addEventListener("click", function () {
+      texto.value = "";
+      actualizarContadores();
+      texto.focus();
+    });
+  </script>
+</body>
+</html>
