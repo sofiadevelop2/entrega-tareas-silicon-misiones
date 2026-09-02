@@ -90,7 +90,7 @@
         <span>Sin espacios</span>
       </div>
       <div class="stat" id="statRestan">
-        <strong id="restan">280</strong>
+        <strong id="restantes">280</strong>
         <span>Restan</span>
       </div>
     </div>
@@ -105,7 +105,7 @@
     let caracteres    = document.querySelector("#caracteres");
     let palabras      = document.querySelector("#palabras");
     let sinEspacios   = document.querySelector("#sinEspacios");
-    let restan        = document.querySelector("#restan");
+    let restantes     = document.querySelector("#restantes");
     let statCaracteres = document.querySelector("#statCaracteres");
     let statRestan     = document.querySelector("#statRestan");
     let botonLimpiar   = document.querySelector("#limpiar");
@@ -118,13 +118,13 @@
     function actualizarContadores() {
       let valor = texto.value;
       let largo = valor.length;
-      let restantes = LIMITE - largo;
+      let restantesCantidad = LIMITE - largo;
       let pasado = largo > LIMITE;
 
       caracteres.textContent = largo;
       palabras.textContent = contarPalabras(valor);
       sinEspacios.textContent = valor.replaceAll(" ", "").length;
-      restan.textContent = restantes;
+      restantes.textContent = restantesCantidad;
 
       texto.classList.toggle("excedido", pasado);
       statCaracteres.classList.toggle("excedido", pasado);
