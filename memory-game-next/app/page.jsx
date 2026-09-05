@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react"
 
-function crearTablero() {
-  const valores = [1, 2, 3, 4, 5, 6, 7, 8]
+function crearTablero(tamano = 4) {
+  const cantidadPares = (tamano * tamano) / 2
+  const valores = Array.from({ length: cantidadPares }, (_, i) => i + 1)
   const duplicados = [...valores, ...valores]
 
   // Fisher-Yates: recorro de atrás hacia adelante intercambiando con una posicion al azar
@@ -27,7 +28,8 @@ function formatearTiempo(segundos) {
 }
 
 export default function Home() {
-  const [tablero, setTablero] = useState(crearTablero)
+  const [tamano, setTamano] = useState(4)
+  const [tablero, setTablero] = useState(() => crearTablero(4))
   const [evaluando, setEvaluando] = useState(false)
   const [movimientos, setMovimientos] = useState(0)
   const [segundos, setSegundos] = useState(0)
@@ -35,12 +37,19 @@ export default function Home() {
 
   const gano = tablero.every((ficha) => ficha.encontrada)
 
-  function reiniciarPartida() {
-    setTablero(crearTablero())
+  // Recibe el tamano por parametro: al cambiar de grilla el estado "tamano"
+  // todavia no esta actualizado cuando se llama desde cambiarTamano
+  function reiniciarPartida(nuevoTamano = tamano) {
+    setTablero(crearTablero(nuevoTamano))
     setMovimientos(0)
     setSegundos(0)
     setJugando(false)
     setEvaluando(false)
+  }
+
+  function cambiarTamano(nuevoTamano) {
+    setTamano(nuevoTamano)
+    reiniciarPartida(nuevoTamano)
   }
 
   function manejarClic(id) {
@@ -121,10 +130,27 @@ export default function Home() {
     <main>
       <header>
         <h1>memory</h1>
-        <button onClick={reiniciarPartida}>Nueva partida</button>
+        <div className="controles">
+          <button
+            className={tamano === 4 ? "activo" : ""}
+            onClick={() => cambiarTamano(4)}
+          >
+            4x4
+          </button>
+          <button
+            className={tamano === 6 ? "activo" : ""}
+            onClick={() => cambiarTamano(6)}
+          >
+            6x6
+          </button>
+          <button onClick={() => reiniciarPartida()}>Nueva partida</button>
+        </div>
       </header>
 
-      <section className="grilla">
+      <section
+        className="grilla"
+        style={{ gridTemplateColumns: `repeat(${tamano}, 1fr)` }}
+      >
         {tablero.map((ficha) => (
           <button
             key={ficha.id}
@@ -141,7 +167,7 @@ export default function Home() {
           <h2>¡Lo lograste!</h2>
           <p>Tiempo: {formatearTiempo(segundos)}</p>
           <p>Movimientos: {movimientos}</p>
-          <button onClick={reiniciarPartida}>Jugar de nuevo</button>
+          <button onClick={() => reiniciarPartida()}>Jugar de nuevo</button>
         </div>
       )}
 

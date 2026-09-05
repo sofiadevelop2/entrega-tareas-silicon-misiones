@@ -28,7 +28,27 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
+}
+
+.controles {
+  display: flex;
+  gap: 8px;
+}
+
+.controles button {
+  padding: 8px 14px;
+}
+
+/* Tamano de grilla seleccionado */
+.controles button.activo {
+  background-color: #a7d8c4;
+  color: #24493a;
+}
+
+.controles button.activo:hover {
+  background-color: #93cdb6;
 }
 
 h1 {
@@ -54,7 +74,6 @@ button:hover {
 
 .grilla {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   width: 100%;
   max-width: 480px;
@@ -104,6 +123,11 @@ footer {
   align-items: center;
   padding: 0;
   cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.ficha:active {
+  transform: scale(0.95);
 }
 
 .ficha:hover {
@@ -115,7 +139,20 @@ footer {
 .ficha:not(:empty):hover {
   background-color: #bfe9d6;
   color: #2f5d4a;
+  animation: aparecer 0.25s ease;
 }
+
+@keyframes aparecer {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
 .pantallaFinal {
   position: fixed;
