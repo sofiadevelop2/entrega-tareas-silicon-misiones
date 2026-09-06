@@ -8,8 +8,8 @@
     * { box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #F1F2F2;
-      color: #20203A;
+      background: #E8E4F3;
+      color: #3D3A4B;
       display: flex;
       justify-content: center;
       padding: 40px 16px;
@@ -19,23 +19,25 @@
       width: 100%;
       max-width: 480px;
       border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(43, 41, 109, 0.12);
+      box-shadow: 0 10px 30px rgba(91, 75, 138, 0.15);
       padding: 26px;
     }
-    h1 { color: #2B296D; font-size: 22px; margin: 0 0 4px; }
-    .sub { color: #6E6E80; font-size: 13px; margin: 0 0 20px; }
+    h1 { color: #5B4B8A; font-size: 22px; margin: 0 0 4px; }
+    .sub { color: #7A7690; font-size: 13px; margin: 0 0 20px; }
     #texto {
       width: 100%;
       min-height: 120px;
       padding: 12px;
-      border: 1.5px solid #CFD0DA;
+      background: #FDFCFF;
+      color: #3D3A4B;
+      border: 1.5px solid #C9B8E8;
       border-radius: 8px;
       font-size: 15px;
       font-family: inherit;
       resize: vertical;
     }
-    #texto:focus { outline: none; border-color: #0E6689; }
-    #texto.excedido { border-color: #C0392B; color: #C0392B; }
+    #texto:focus { outline: none; border-color: #A98FDB; box-shadow: 0 0 0 3px rgba(169, 143, 219, 0.25); }
+    #texto.excedido { border-color: #E8858A; color: #B0555D; }
 
     .resultados {
       display: flex;
@@ -44,21 +46,23 @@
     }
     .stat {
       flex: 1;
-      background: #F7F7FA;
-      border: 1px solid #E7E7EE;
+      background: #FBF9FF;
+      border: 1px solid #E3DBF5;
       border-radius: 8px;
       padding: 10px;
       text-align: center;
+      box-shadow: 0 2px 6px rgba(91, 75, 138, 0.10);
     }
-    .stat strong { display: block; font-size: 20px; color: #2B296D; }
-    .stat.excedido strong { color: #C0392B; }
-    .stat span { font-size: 12px; color: #6E6E80; }
+    .stat strong { display: block; font-size: 20px; color: #5B4B8A; }
+    .stat.excedido { border-color: #E8858A; background: #FDF3F3; }
+    .stat.excedido strong { color: #B0555D; }
+    .stat span { font-size: 12px; color: #7A7690; }
 
     #limpiar {
       margin-top: 16px;
       width: 100%;
-      background: #0E6689;
-      color: #fff;
+      background: #A7D8C4;
+      color: #24493A;
       border: none;
       border-radius: 8px;
       padding: 11px;
@@ -66,7 +70,7 @@
       font-weight: 600;
       cursor: pointer;
     }
-    #limpiar:hover { background: #0b4f68; }
+    #limpiar:hover { background: #93CDB6; }
   </style>
 </head>
 <body>
