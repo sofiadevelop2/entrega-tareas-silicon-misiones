@@ -1,0 +1,185 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  background-color: #e8e4f3;
+  color: #3d3a4b;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+main {
+  width: 100%;
+  max-width: 560px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.controles {
+  display: flex;
+  gap: 8px;
+}
+
+.controles button {
+  padding: 8px 14px;
+}
+
+/* Tamano de grilla seleccionado */
+.controles button.activo {
+  background-color: #a7d8c4;
+  color: #24493a;
+}
+
+.controles button.activo:hover {
+  background-color: #93cdb6;
+}
+
+h1 {
+  font-size: 2rem;
+  letter-spacing: 1px;
+  color: #5b4b8a;
+}
+
+button {
+  font: inherit;
+  font-weight: bold;
+  color: #4a2a2c;
+  background-color: #f7a9a0;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f18d82;
+}
+
+.grilla {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 120px;
+  padding: 12px;
+  border: 2px dashed #cfc6e6;
+  border-radius: 12px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.tarjeta {
+  flex: 1;
+  padding: 16px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: #6e6a80;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(91, 75, 138, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tarjeta strong {
+  font-size: 1.5rem;
+  color: #5b4b8a;
+}
+
+/* Ficha boca abajo: el JSX renderiza "" y el boton queda sin hijos, asi que
+   :empty la distingue de la destapada sin agregar una clase nueva */
+.ficha {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border-radius: 50%;
+  background-color: #c9b8e8;
+  color: #3d3a4b;
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.ficha:active {
+  transform: scale(0.95);
+}
+
+.ficha:hover {
+  background-color: #b49fdd;
+}
+
+/* Ficha destapada (dadaVuelta o encontrada): pastel menta, mas claro */
+.ficha:not(:empty),
+.ficha:not(:empty):hover {
+  background-color: #bfe9d6;
+  color: #2f5d4a;
+  animation: aparecer 0.25s ease;
+}
+
+@keyframes aparecer {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+.pantallaFinal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: min(90%, 340px);
+  padding: 32px 24px;
+  border-radius: 16px;
+  background-color: #fbf7ff;
+  color: #6e6a80;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  /* Oscurece toda la pantalla detras sin necesidad de un div extra.
+     box-shadow no afecta el layout ni genera scroll. */
+  box-shadow: 0 0 0 100vmax rgba(45, 35, 70, 0.65);
+}
+
+.pantallaFinal h2 {
+  font-size: 1.75rem;
+  color: #5b4b8a;
+}
+
+.pantallaFinal button {
+  margin-top: 8px;
+  align-self: center;
+}
